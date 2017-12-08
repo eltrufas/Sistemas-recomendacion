@@ -1,0 +1,1595 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simple Sectioned Essay Template
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when
+% writing essay content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{article}
+
+    \usepackage[T1]{fontenc}
+
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics
+                         % to support a larger range
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+
+
+
+
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Untitled1}
+
+
+
+
+    % Pygments definitions
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{geometry} % Required to change the page size to A4
+\geometry{a4paper} % Set the page size to be A4 as opposed to the default US Letter
+\usepackage{graphicx} % Required for including pictures
+
+
+\usepackage[T1]{fontenc}
+
+\usepackage{float} % Allows putting an [H] in \begin{figure} to specify the exact location of the figure
+\usepackage{wrapfig} % Allows in-line images such as the example fish picture
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\linespread{1.2} % Line spacing
+
+%\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs
+
+\graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
+
+
+\renewcommand\refname{Bibliografía}
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+
+\textsc{\LARGE Universidad de Sonora}\\[1.5cm] % Name of your university/college
+\textsc{\Large Reconocimiento de Patrones}\\[0.5cm] % Major heading such as course name
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Sistemas de recomendacion: prediccion de preferencias}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Autor:}\\
+Rafael Castillo % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Profesor:} \\
+Dr. Ramón Soto de la Crúz % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[4cm]
+
+{\large \today}\\[3cm]
+
+\vfill
+
+\end{titlepage}
+\tableofcontents
+
+\newpage
+
+
+\section{Resumen} 
+
+Los sistemas de recomendación son métodos cuya importancia cada vez es mayor en
+los sistemas que interactúan con usuarios. En este proyecto de implementaron
+cuatro método de recomendación diferentes aplicados a la misma base de datos con
+el fin de analizar las ventajas y desventajas de cada uno de ellos. En este
+reporte se introduce el problema de recomendación, los factores que influyen en
+el diseño de un sistema de recomendación, así como el tipo de soluciones que
+existen para estos problemas. Se hace una exploración de diversos métodos de
+predicción de calificaciones, incluyendo recomendación basada en contenido,
+filtrado colaborativo basado en memoria y filtrado colaborativo basado en
+modelos. Finalmente se propone una solución al problema del arranque en frió. Se
+concluye que el metodo de factorización SVD tiene muchas ventajas sobre los
+otros metodos pero que cada uno tiene un nicho que llenar.
+
+\section{Introducción}
+
+Un sistema de recomendación es un sistema que ayuda a un usuario encontrar algo
+cuando el proceso de búsqueda es desafiante por la cantidad de opciones
+existentes \cite{su2009survey}. La recomendación ha existido en la naturaleza y
+en la humanidad por milenios. Cuando las hormigas buscan comida, primero todas
+exploran el espacio. Si una hormiga encuentra comida, deja una feromona en esa
+ubicación, lo que lleva a otras hormigas a ir a ese lugar. Estas hormigas están
+basándose en la experiencia de otra para tomar decisiones, una recomendación.
+
+Existen ejemplos de sistemas de recomendación desde antes de que los humanos
+desarrollaran la escritura o el habla. Si un hombre prehistórico veía una planta
+desconocida, tenia dos opciones: Si era un hombre que no conocía los sistemas de
+recomendación, se arriesgaba y comía la planta; si era un hombre que sí sabía
+sobre sistemas de recomendaciones, esperaba a que un cavernícola menos dotado
+comiera la planta, si el cavernícola parecía disfrutarla, el también la comía,
+pero si el otro caía al suelo dolorido, entonces su vida fue salvada gracias a
+la recomendación del otro.
+
+Asi, podemos ver que el concepto de la recomendación ha existido por mucho
+tiempo. A través de toda nuestra historia hemos encontrado formas de poder
+evaluar articulos sin tener que consumirlos nosotros mismos. Tradicionalmente
+aprovechabamos a otros humanos que estaban dispuestos a consumir los articulos
+que no queriamos (individuos tradicionalmente llamados "criticos"), pero en un
+mundo donde la automatización esta por doquier, hemos desarrollado tecnicas que
+nos permiten generar recomendaciones a partir de datos recolectados de usuarios,
+aprovechando la llamada "inteligencia collectiva" de muchos para aproximar los
+gustos de un individuo
+
+Los sistemas de recomendación tienen un alto valor. Las recomendaciones pueden
+mostrarse en varias interfaces, amplificando su eficacia. Por ejemplo, las
+recomendaciones pueden tener interfaces obvias como listas de sugerencia, pero
+también pueden existir interfaces mas sutiles, como filtros de correo
+electrónico o sistemas de evaluación de candidatos de empleo.
+
+Por la naturaleza de muchos de estos metodos, como muchos otros metodos de
+aprendizaje, funcionan mucho mejor cuando la cantidad de datos es mucho mayor.
+Por esto, muchas empresas muestan interes en aprovechar la gran cantidad de
+datos que recolectan para crear sistemas de recomendación, ya que son un recurso
+que tiene un gran impacto enriquecedor en las experiencias de usuario.
+
+\subsection{Familias de métodos de recomendación}
+
+Hay muchas formas de lograr hacer recomendaciones automáticas, algunas mas
+sofisticadas que otras. Existen los métodos sencillos no personalizados, que se
+basan simplemente en métricas como popularidad. Otro método es usar la llamada
+asociación de productos, es decir recomendar a un usuario artículos similares a
+uno que este viendo. Estos métodos no no son de mucho interés, pues las
+recomendaciones no personalizadas no son de tanto valor. Por esta razón nos
+centraremos en los otros dos métodos.
+
+Un categoría de métodos capaces de personalizar las recomendaciones a un usuario
+la de los métodos basados en contenido. Aquí aprovechamos conocimiento previo
+sobre los artículos (características de estos) para aproximar los gustos de un
+usuario a partir de las calificaciones que ya ha impartido. Este método también
+es conocido como filtrado basado en contenido y esta estrechamente relacionado
+al problema mas general de filtrado de información.
+
+La ultima familia de métodos a mencionar son los del filtrado colaborativo. La
+idea del filtrado colaborativo es aprovechar las calificaciones de todos los
+usuarios del sistema para poder predecir preferencias y dar recomendaciones. El
+filtrado colaborativo además se separa en dos categorías: el filtrado que
+utiliza todas las calificaciones en el sistema, conocido como filtrado basado en
+memoria; y el filtrado que utiliza aprendizaje para poder predecir
+calificaciones, conocido como filtrado basado en modelos.
+
+Una ventaja del filtrado colaborativo es que tiene mas potencial de encontrar
+correlaciones sorprendentes entre ciertos articulos muy distintos, algo que
+dificilmente sucederia en un metodo basado en contenido. Esto ocurre porque los
+metodos de filtrado colaborativo existen solamente basados en las preferencias
+de los usuarios, no en preconcepciones sobre el contenido de los articulos,
+llevando a recomendaciones basadas más en opinion colectiva que en prejuicios
+sobre los articulos.
+
+\subsection{Calificaciones} % Sub-section
+
+La base para el filtrado colaborativo y los sistemas de recomendación en
+general, una calificación es un indicador de la preferencia que tiene un usuario
+hacia un articulo. Hablaremos de calificaciones en dos categorías, implícitas y
+explicitas.
+
+Las calificaciones explicitas son en las que se vienen a la cabeza cuando
+pensamos en calificación. Una calificación se considera explicita cuando el
+usuario explícitamente expresa su opinión sobre un articulo. Esto puede ser
+desde una escala numérica como las muy comunes de 1 a 5 estrellas, hasta un
+sistema de votos como el de Facebook o Reddit. Las escalas mas granulares tienen
+la ventaja de ser mas expresivas, mientras que un voto binario es mas fácil para
+el usuario, lo que lo hace útil para contenido mas efímero, como una noticia o
+un tweet.
+
+Una calificación implícita se extrae de comportamiento del usuario que no tiene
+relación directa con su preferencia hacia un articulo. Hacer clic sobre un
+enlace puede considerarse una calificación positiva hacia este. Ver un vídeo
+hasta el final puede considerarse una calificación positiva, mientras de que
+dejarlo de ver a la mitad es uno negativo. Estas calificaciones implícitas
+pueden significar mucho y ser muy abundantes, dando buenas recomendaciones.
+
+La variedad de fuentes de donde se pueden minar calificaciones es una de los
+elementos que hacen que los sistemas de recomendación sean útiles en
+aplicaciones donde anteriormente no se considerarían. Esto combinado con la
+recolección masiva de datos le da a las grandes corporaciones nuevas y
+emocionantes formas de llevar a cabo practicas horripilantes.
+
+
+\section{Datos para el desarrollo de sistemas de recomendación}
+
+Existen varios conjuntos de datos públicamente disponibles que se utilizan para
+el desarrollo de sistemas de recomendación. Estos son los que se consideraron
+para el desarrollo de los métodos.
+
+\begin{description}
+\item [MovieLens \cite{movielens}] es una base de datos de calificaciones de
+  película. Se encuentra disponible en varios tamaños, pero aquí solo se tomara
+  en cuenta la versión pequeña (100,000 calificaciones sobre 9,000 películas por
+  700 usuarios).
+\item [Book Crossings \cite{bookcrossing}] es un conjunto de datos de
+  calificaciones de libros. Tiene 1 millón de calificaciones para 90,000
+  usuarios en 270,000 libros, volviéndola la base de datos con calificaciones
+  mas dispersas.
+\item [Jester \cite{eigentaste}] es un conjunto de datos que incluye 5 millones
+  de calificaciones por 100,000 usuarios en 150 chistes. Esta es la base de
+  datos mas densa.
+\end{description}
+
+Estos son conjuntos de datos explicitamente generados para desarrollo de
+sistemas recomendadores, como se mencionó antes, las calificaciones necesarias
+para esta clase de sistemas pueden surgir de lugares inesperados. Por ejemplo,
+se puede obtener una calificación a partir del tiempo tomado para leer un
+articulo, o por analisis de sentimientos aplicado a un comentario dejado en un
+video.
+
+Para la mayoría de los métodos de filtrado colaborativo, necesitamos que los
+datos tengan la forma de una matriz usuario-articulo (user-item matrix), que
+tiene como filas cada articulo y como columnas a los usuarios. El único dataset
+que viene ya en este formato es Jester, los demás se encuentran en un formato
+mas parecido al de una base de datos relacional. En el apéndice \ref{subsec:a1},
+se muestra un ejemplo para accesar a la base de datos \emph{movielens}
+
+Para la prueba de los métodos que se presentaran, se utilizo la base de datos de
+MovieLens, ya que viene en varios tamaños y tiene una densidad adecuada para las
+pruebas que realizaremos.
+
+\section{Métodos para predecir preferencias}
+
+El componente mas crucial para el desarrollo de un sistema de recomendaciones es
+el que predice las preferencias de un usuario por un articulo. A continuación se
+presenta la descripción e implementación de diversos métodos para predecir
+preferencias utilizados para el desarrollo de sistemas de recomendaciones.
+
+\subsection{Recomendaciones basadas en contenido} % Major section
+
+Los primeros métodos a revisar son los que se basan en características ya bien
+conocidas sobre los artículos calificados \cite{contentbased}. Estos métodos son
+también conocidos como métodos de filtrado de contenido ya que utilizan las
+características del
+
+La idea es que dado un vector con $N$ características $x^{(i)}$ y conociendo un
+vector $\theta^(j)$, también de tamaño $N$ donde $\theta_k^{(j)}$ sea la
+preferencia del usuario $j$ por la característica $k$, podemos predecir la
+calificación del articulo $i$ esta dada por
+
+$$(\theta^{(j)})^Tx^{(i)}$$
+
+La ventaja de este método es que puramente se basa en contenido. No se necesita
+tomar en cuenta las calificaciones de usuarios además de la del usuario activo.
+Por esta razón este método tiene un bajo uso de recursos, lo cual lo hace
+deseable para muchas aplicaciones.
+
+La desventaja es la obvia: es necesario tener caracteristicas concretas de los
+articulos previo a la aplicación del metodo. Muchas veces esto hace que el
+metodo sea indeseable para aplicaciones donde hay una cantidad alta de
+articulos, o en situaciones donde es dificil cuantificar calidades de los
+articulos, como en un sistema de recomendación de arte. Pocas veces escuchas "me
+gustan las pinturas azules" en lugar de "me gustan las pinturas que me hacen
+sentir melancolico".
+
+\subsubsection{Características de los artículos}
+
+La primera parte que define un método basado en contenido es la fuente de donde
+se obtienen las características de los artículos. La opción mas obvia es irse
+por la ruta del conocimiento experto y asignar las características manualmente
+para cada articulo. Este método puede sonar demasiado ingenuo pero puede ser
+útil en muchos casos, por ejemplo para asignar características técnicas o
+fácilmente cuantificables a un conjunto de artículos similares (por ejemplo, en
+una tienda donde solo vendan un tipo de articulo).
+
+También es factible crear interfaces para que los usuarios mismos determinen las
+características de los artículos. Este método puede llevar a la generación de
+una cantidad enorme de características, pero no es necesariamente confiable.
+Muchos servicios utilizan esta opción en forma de etiquetas que un usuario puede
+asignar a un articulo y que un ingeniero puede aprovechar después para
+determinar características de este.
+
+Una ultima opción a mencionar es la extracción automática de características de
+un articulo. Por ejemplo, las palabras de un nota periodística pueden ser
+característicos de este, como lo pueden ser las frecuencias mas importantes de
+una canción, o la longitud de un vídeo.
+
+\subsubsection{Gustos de los usuarios}
+
+La pregunta ahora se vuelve como determinar los gustos del usuario $j$, dados
+por $\theta^{(j)}$. Una forma posible es preguntarle estos datos al usuario.
+Este enfoque se ha usado históricamente, por ejemplo en aplicaciones que le
+piden a un usuario que especifique sus gustos o que presentan cuestionarios
+acerca del contenido que quisiera ver.
+
+Un enfoque tal vez mas interesante es usar las calificaciones previas del
+usuario para aproximar $\theta^{(j)}$. Una opción simple es simplemente hacer
+una suma de las características de los artículos $X_j$ que ya consumió el
+usuario:
+
+$$\theta^{(j)} = \sum_{i\in X_j}r_{i, j}x^{(i)}$$
+
+También podemos modelar los gustos como un problema de regresión lineal donde
+nuestra función de error esta dada por
+
+$$\frac{1}{2}\sum_{i:r(i, j)=1} {\Big((\theta^{(j)})^Tx^{(i)}\Big)^2} +
+\frac{\lambda}{2}\sum_{k=1}^n {(\theta^{(j)}_k)^2}$$
+
+Si encontramos el $\theta^{(j)}$ que minimice este error, tendremos una
+aproximación de los gustos del usuario, que podremos usar para predecir sus
+calificaciones a artículos que no conoce aun.
+
+En el anexo \ref{subsec:a2} se presentan una implementación del método de
+vecinos mas cercanos para la base de datos de \emph{MovieLens}
+
+
+\subsection{Vecinos mas cercanos}
+
+El siguiente método que veremos es un método de filtrado colaborativo, es decir,
+que no solo toma en cuenta las calificaciones del usuario para el cual estamos
+prediciendo calificaciones, sino que tomamos en cuenta las preferencias de
+nuestros usuarios.
+
+El método utiliza una búsqueda de los k vecinos mas cercanos para encontrar una
+vecindad del usuario para el cual queremos predecir preferencias. Una vez que
+encontremos a los k vecinos mas cercanos $U_a$ y sus respectivas distancias,
+podemos predecir la calificación del usuario $a$ en el articulo $i$ como
+
+$$p_{a, i} = \frac {\sum\limits_{i\in U_a} w_{u, i}r_{ui}} {\sum\limits_{i\in U_a} w_{u, i}}$$
+
+La idea aqui es encontrar una vecindad de usuarios que compartan gustos con el
+usuario, gustos que usaremos despues para predecir sus calificaciones futuras.
+De esta forma, aprovechamos la opinion colectiva de usuarios similares para
+obtener una predicción decente de las preferencias de un individuo.
+
+La predicción de preferencias usando este método produce resultados decentes y
+el tiempo de computo para una calificación predicha es mínima. La desventaja
+obvia del método es que requiere que toda la base de datos se mantenga en
+memoria, por lo que este método puede volverse prohibitivo para conjuntos de
+datos muy grandes si no se realizan trucos de optimización.
+
+El método clásico para filtrado colaborativo usando vecinos cercanos surgió en
+el grupo de investigación GroupLens, y esta descrito en detalle por Sarwar et al.
+en \cite{itembased}.
+
+En el anexo \ref{subsec:a3} se presenta un ejemplo del metodo de vecinos mas
+cercanos para el filtrado colaborativo en la base de datos de MovieLens
+
+\subsection{Filtrado colaborativo usando regresión}
+
+En la sección de de recomendación basada en contenido, se hablo de un método de
+aproximar $\theta^{(j)}$ usando regresión. También es claro ver que se puede
+hacer un proceso similar para aproximar las características $x^{(i)}$ de un
+articulo conociendo previamente los gustos  $\theta^{(j)}$ de un usuario. Estos
+dos procesos de regresión pueden extenderse para calcular las características
+$x^{(i)}$ para todas las $i$ resultando en una matriz $X$, así como una análoga
+matriz $\Theta$. Aun mas allá, podemos aproximar estos dos dentro de la misma
+regresión lineal. Llevando a cabo este proceso, efectivamente obtenemos una
+descomposición de la matriz $R$ que nos permite aproximar todas las
+calificaciones de nuestros usuarios simplemente calculando $\Theta^T X$.
+
+Este método aprovecha todos los valores de la matriz de calificaciones para
+predecir calificaciones faltantes, convirtiéndolo en un método de filtrado
+colaborativo. Además, utiliza un modelo de aprendizaje en lugar de mantener
+todas las calificaciones en memoria, volviéndolo un método de filtrado
+colaborativo basado en modelo\cite{vucetic2005collaborative}.
+
+Al utilizar este método, tenemos la ventaja de que una vez que se completa el
+entrenamiento, el uso de memoria se reduce. Además de esto, obtenemos como
+producto secundario una matriz $X$ aproximada. Podemos considerar esta matriz
+$X$ una matriz de características arbitraria (aunque esta contenga mas que nada
+características difíciles de interpretar para un humano), que podemos usar para
+realizar operaciones que requieran de una matriz como esta, incluyendo uno que
+veremos en una seccion futura.
+
+Este y otros métodos basados en modelos que resultan en dos matrices de rango
+menor, predeciblemente son conocidos como factorizacion de matrices de rank
+menor (low rank matrix factorization).
+
+En el anexo \ref{subsec:a4} se incluye una implementación de la descomposición
+basada en regresión y como se utilizaría para obtener recomendaciones.
+
+\subsubsection{Normalización de medias}
+
+Al aplicar el método de regresión sobre nuestros datos, podemos darnos cuenta de
+un detalle peculiar sobre su naturaleza: para un usuario nuevo, todas sus
+calificaciones se aproximan como 0. Esta observación es parte del problema de
+arranque en frió, que veremos una sección futura.
+
+Una forma de remediar este problema es restar a cada calificación existente la
+media de calificaciones para ese articulo en particular. Haciendo esto, una
+calificación 0, en vez de tener un valor arbitrario, se vuelve la calificación
+media de ese articulo. Esto ocasiona que para un usuario nuevo, se prediga una
+calificación promedio para cada articulo, un resultado mas razonable.
+
+\subsubsection{Descomposición por valores singulares}
+
+SVD es una técnica de factorización matricial que busca reducir las
+características de una matriz a un espacio vectorial $K < N$. SVD nos deja con
+tres matrices tales que $R = U×S×V^T$ \cite{svd}. Lo interesante de esto es que la
+factorización SVD es equivalente al proceso de regresión descrito arriba.
+La diferencia radica en que existen algoritmos ya optimizados para calcular la
+SVD de una matriz incluidas en paquetes de álgebra lineal populares, como
+LAPACK.
+
+El método SVD es de los mas importantes y mas usados para el desarrollo de
+sistemas de recomendación. Del 2006 al 2009, Netflix llevo a cabo una
+competencia para determinar el mejor algoritmo de filtrado colaborativo
+\cite{svd}. En el 2009 finalmente se otorgo el premio a un equipo que había
+desarrollado un método basado en la descomposición SVD, mostrando que al menos
+para el caso de uso de Netflix, el SVD es el método mas óptimo.
+
+En el anexo \ref{subsec:a5}, se incluye una aplicación de las recomendaciones
+usando una factorización SVD.
+
+\section{El problema de arranque en frío}
+\label{clustering}
+
+Todos los métodos de predicción que se vieron solo pueden dar buenas
+recomendaciones si el usuario ya tiene calificaciones en el sistema.El problema
+del arranque en frió radica en como presentarle recomendaciones a un usuario
+nuevo.
+
+A continuación proponemos un método como solución para el problema de arranque
+en frió. El requerimiento para aplicar este método es solamente contar con
+un conjunto de vectores de características de las películas. Estos pueden
+surgir directa o indirectamente para los métodos basados en contenido o de
+descomposición matricial. Incluso es posible obtener resultados aplicando este
+método directamente a la matriz de calificaciones.
+
+La idea general del método es agrupar los artículos del sistema según sus
+características. Se debe buscar dividir los artículos de una forma que se logra
+división representativa, pero que no en demasiados grupos, pues la idea es que
+el usuario califique un articulo de cada grupo.
+
+Para crear los grupos de artículos, se empleo el método de las K medias. No es
+necesario el uso de un algoritmo de clustering mas sofisticado, ya que el
+propósito es crear una separación mas o menos uniforme del espacio, no
+encontrar agrupamientos lógicos de los artículos.
+
+Una vez que dividimos los artículos, proponemos presentar como recomendaciones
+el articulo mas relevante de cada cluster. Para este propósito, necesitamos
+definir una medida de relevancia, inspirados por el TFIDF, proponemos la
+siguiente métrica para la relevancia $t_i$ para el articulo $i$
+
+$$t_i = \sum\limits_{j\in U}R_{i, j}log\big(1 + \frac{N}{n_i}\big)$$
+
+Una vez que obtenemos las medidas de relevancia de los artículos, obtenemos el
+articulo mas relevante de cada cluster, que es el que recomendaremos al usuario
+inicialmente. Estas recomendaciones son una muestra significativa del espacio
+gracias al clustering, pero gracias a la medida de relevancia tambien resulta en
+articulos a los cuales el usuario probablemente ya ha sido expuesto antes,
+permitiendo que el sistema tenga una idea inicial de su gusto decente.
+
+Una ejemplo de implementación de este metodo puede encontrarse en el anexo
+\ref{subsec:a6}.
+
+\section{Conclusión} % Major section
+
+
+
+La variedad de enfoques que se pueden tomar para el desarrollo de sistemas de
+recomendación hace que sea un área interesante y rica del reconocimiento de
+patrones. Si se tiene un conocimiento solido del área, los sistemas de
+recomendación pueden presentar aplicaciones en muchos dominios. La tabla
+\ref{comparacion} muestra una comparación cualitativa de los distintos metodos
+de recomendación revisados.
+
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+    \hline
+    Metodo & Filtrado de contenido & Vecinos mas cercanos & Regresión/SVD\\
+    \hline
+    Facilidad de implementación & $\star$ & $\star\star\star$ & $\star\star$\\
+    Flexibilidad & $\star$ & $\star\star\star$ & $\star\star\star$ \\
+    Calidad de recomendaciones & $\star\star$ & $\star\star$ & $\star\star\star$ \\
+    Uso de memoria & $\star\star\star$ & $-\star$ & $\star\star\star$ \\
+    \hline
+    \end{tabular}
+    \caption{Comparación de metodos de predicción de preferencias}
+    \label{comparacion}
+    \end{table}
+   
+En general, la conclusión a la que se llego es que para sistemas modernos donde
+se quieren recomendaciones de alta calidad con muchos usuarios, SVD es el metodo
+a cual acudir. Esto se ve claramente en el campo de investigación sobre sistemas
+recomendadores, donde muchos de los nuevos avances son relacionados a la
+factorización SVD, incluyendo metodos que permiten calcular la descomposición de
+forma distribuida.
+
+Esto no significa que los otros metodos no tengan su lugar. Los metodos basados
+en contenido son utiles para campos donde existe mucha información experta o
+donde se puede minar conocimiento colectivo de otra forma. Los metodos de
+vecinos mas cercanos son mas faciles de implementar y funcionan bien cuando la
+proporción del sistema es adecuada.
+
+Los métodos de recomendaciones basadas en contenido y de filtrado colaborativo
+tienen un lugar importante en el desarrollo de aplicaciones modernas, en parte
+impulsado por el boom de datos moderno. La recolección de datos masivos hace que
+sea posible derivar datos de calificación de lugares sorprendentes, abriendo las
+puertas de creatividad a sistemas de recomendación nuevos e interesantes.
+
+\bibliographystyle{unsrt}
+\addcontentsline{toc}{section}{Bibliografía}
+\bibliography{references}
+
+
+\appendix
+\section{Anexos}
+
+\subsection{Ejemplo de acceso a la base de datos \emph{Movielens}}
+\label{subsec:a1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}latest\PYZhy{}small/ratings.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    user\_id  movie\_id  rating   timestamp
+        0        1        31     2.5  1260759144
+        1        1      1029     3.0  1260759179
+        2        1      1061     3.0  1260759182
+        3        1      1129     2.0  1260759185
+        4        1      1172     4.0  1260759205
+\end{Verbatim}
+
+Podemos usar pandas para preparar los datos a el formato que necesitamos
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{ui\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+        \PY{n}{ui\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} user\_id   1    2    3    4    5    6    7    8    9    10  {\ldots}   662  663
+        movie\_id                                                   {\ldots}
+        1         NaN  NaN  NaN  NaN  NaN  NaN  3.0  NaN  4.0  NaN {\ldots}   NaN  4.0
+        2         NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN {\ldots}   5.0  NaN
+        3         NaN  NaN  NaN  NaN  4.0  NaN  NaN  NaN  NaN  NaN {\ldots}   NaN  NaN
+        4         NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN {\ldots}   NaN  NaN
+        5         NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN {\ldots}   NaN  NaN
+
+
+        [5 rows x 671 columns]
+\end{Verbatim}
+
+\subsection{Filtrado de contenido para \emph{MovieLens}}
+\label{subsec:a2}
+
+MovieLens incluye una base de datos de etiquetas así como la relevancia de cada etiqueta a cada película. Podemos usar estas relevancias para crear nuestra matriz de características para las películas del conjunto. Hagamos esto y veamos cuales son las etiquetas mas relevantes para Toy Story.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+        \PY{n}{movies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}20m/movies.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+
+        \PY{n}{genome\PYZus{}tags} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}20m/genome\PYZhy{}tags.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{tag}
+        \PY{n}{genome\PYZus{}scores} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}20m/genome\PYZhy{}scores.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{genome\PYZus{}scores}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tag\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relevance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{genome\PYZus{}matrix} \PY{o}{=} \PY{n}{genome\PYZus{}scores}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tag\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                            \PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relevance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{genome\PYZus{}matrix}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{n}{genome\PYZus{}tags}\PY{p}{[}\PY{n+nb}{id}\PY{p}{]} \PY{k}{for} \PY{n+nb}{id} \PY{o+ow}{in} \PY{n}{genome\PYZus{}matrix}\PY{o}{.}\PY{n}{columns}\PY{p}{]}
+
+        \PY{c+c1}{\PYZsh{} reducimos las peliculas a las que tienen etiquetas}
+        \PY{n}{movies} \PY{o}{=} \PY{n}{movies}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{genome\PYZus{}matrix}\PY{o}{.}\PY{n}{index}\PY{p}{]}
+
+        \PY{c+c1}{\PYZsh{} normalizamos el genoma}
+        \PY{n}{genome\PYZus{}matrix} \PY{o}{=} \PY{n}{genome\PYZus{}matrix} \PY{o}{*} \PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+
+        \PY{n}{genome\PYZus{}matrix}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} toys                  0.9985
+        computer animation    0.9970
+        pixar animation       0.9920
+        kids and family       0.9815
+        animation             0.9715
+        kids                  0.9585
+        pixar                 0.9335
+        children              0.9285
+        cartoon               0.9130
+        imdb top 250          0.8840
+        Name: 1, dtype: float64
+\end{Verbatim}
+
+Ahora vamos a cargar el archivo de calificaciones y seleccionar las
+calificaciones de un usuario aleatorio.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{ratings} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}20m/ratings.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ratings}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} reducimos a solo las peliculas con etiquetas}
+        \PY{n}{ratings} \PY{o}{=} \PY{n}{ratings}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{ratings}\PY{o}{.}\PY{n}{movie\PYZus{}id}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{movies}\PY{o}{.}\PY{n}{index}\PY{p}{)}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{user} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{ratings}\PY{o}{.}\PY{n}{user\PYZus{}id}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+
+        \PY{n}{user\PYZus{}ratings} \PY{o}{=} \PY{n}{ratings}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{ratings}\PY{o}{.}\PY{n}{user\PYZus{}id} \PY{o}{==} \PY{n}{user}\PY{p}{]}
+        \PY{n}{user\PYZus{}ratings} \PY{o}{=} \PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{p}{[}\PY{n}{movies}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n+nb}{id}\PY{p}{]}\PY{o}{.}\PY{n}{title}
+                                                  \PY{k}{for} \PY{n+nb}{id} \PY{o+ow}{in} \PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{movie\PYZus{}id}\PY{p}{]}\PY{p}{)}
+
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(82, 5)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}           user\_id  movie\_id  rating   timestamp  \textbackslash{}
+        13937369    96288      2997     5.0  1159793149
+        13937382    96288      4848     5.0  1159792275
+        13937362    96288      2329     5.0  1159794208
+        13937367    96288      2858     5.0  1159794335
+        13937348    96288      1227     5.0  1159794784
+        13937347    96288      1222     5.0  1159794563
+        13937345    96288      1193     5.0  1159793167
+        13937376    96288      3949     5.0  1159792156
+        13937356    96288      1732     5.0  1159794733
+        13937406    96288     26150     5.0  1159794905
+        13937396    96288      5954     5.0  1159794332
+        13937336    96288       296     5.0  1159792664
+        13937334    96288       288     5.0  1159793780
+        13937388    96288      4995     4.5  1159792982
+        13937403    96288      7371     4.5  1159794656
+        13937363    96288      2542     4.5  1159794369
+        13937402    96288      7153     4.5  1159792638
+        13937365    96288      2692     4.5  1159794799
+        13937397    96288      5995     4.5  1159792380
+        13937368    96288      2959     4.5  1159793322
+
+                                                              title
+        13937369                        Being John Malkovich (1999)
+        13937382                            Mulholland Drive (2001)
+        13937362                          American History X (1998)
+        13937367                             American Beauty (1999)
+        13937348                 Once Upon a Time in America (1984)
+        13937347                           Full Metal Jacket (1987)
+        13937345             One Flew Over the Cuckoo's Nest (1975)
+        13937376                         Requiem for a Dream (2000)
+        13937356                           Big Lebowski, The (1998)
+        13937406              Andrei Rublev (Andrey Rublyov) (1969)
+        13937396                                   25th Hour (2002)
+        13937336                                Pulp Fiction (1994)
+        13937334                        Natural Born Killers (1994)
+        13937388                           Beautiful Mind, A (2001)
+        13937403                                    Dogville (2003)
+        13937363           Lock, Stock \& Two Smoking Barrels (1998)
+        13937402  Lord of the Rings: The Return of the King, The{\ldots}
+        13937365                   Run Lola Run (Lola rennt) (1998)
+        13937397                                Pianist, The (2002)
+        13937368                                  Fight Club (1999)
+\end{Verbatim}
+
+Programamos nuestro modelo de regresión y lo corremos para nuestros datos
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{optimize} \PY{k}{import} \PY{n}{fmin\PYZus{}cg}
+
+        \PY{k}{def} \PY{n+nf}{fit\PYZus{}users}\PY{p}{(}\PY{n}{ratings}\PY{p}{,} \PY{n}{mask}\PY{p}{,} \PY{n}{features}\PY{p}{,} \PY{n}{means}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{lam}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{means} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                \PY{n}{means} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{ratings}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{n}{r} \PY{o}{=} \PY{n}{mask}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+            \PY{n}{ratings} \PY{o}{=} \PY{n}{ratings}\PY{o}{.}\PY{n}{T}
+
+            \PY{n}{theta\PYZus{}shape} \PY{o}{=} \PY{p}{(}\PY{n}{ratings}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+
+            \PY{n}{theta0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{o}{*}\PY{n}{theta\PYZus{}shape}\PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{def} \PY{n+nf}{optimization\PYZus{}target}\PY{p}{(}\PY{n}{folded}\PY{p}{)}\PY{p}{:}
+                \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{folded}\PY{p}{,} \PY{n}{theta\PYZus{}shape}\PY{p}{)}
+                \PY{n}{differences} \PY{o}{=} \PY{n}{r} \PY{o}{*} \PY{p}{(}\PY{n}{features} \PY{o}{@} \PY{n}{theta}\PY{o}{.}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{n}{ratings}\PY{p}{)}
+                \PY{k}{return} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{differences}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{lam} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{theta}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+
+            \PY{k}{def} \PY{n+nf}{gradient}\PY{p}{(}\PY{n}{folded}\PY{p}{)}\PY{p}{:}
+                \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{folded}\PY{p}{,} \PY{n}{theta\PYZus{}shape}\PY{p}{)}
+                \PY{n}{differences} \PY{o}{=} \PY{n}{r} \PY{o}{*} \PY{p}{(}\PY{n}{features} \PY{o}{@} \PY{n}{theta}\PY{o}{.}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{n}{ratings}\PY{p}{)}
+
+                \PY{k}{return} \PY{p}{(}\PY{n}{differences}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{features} \PY{o}{+} \PY{n}{lam} \PY{o}{*} \PY{n}{theta}\PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+
+            \PY{n}{theta} \PY{o}{=} \PY{n}{fmin\PYZus{}cg}\PY{p}{(}\PY{n}{f}\PY{o}{=}\PY{n}{optimization\PYZus{}target}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{theta0}\PY{p}{,} \PY{n}{fprime}\PY{o}{=}\PY{n}{gradient}\PY{p}{)}
+
+            \PY{k}{return} \PY{n}{theta}
+
+        \PY{n}{user\PYZus{}rating\PYZus{}vector} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n}{movies}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+        \PY{n}{user\PYZus{}rating\PYZus{}vector}\PY{p}{[}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{movie\PYZus{}id}\PY{p}{]} \PY{o}{=} \PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{rating}
+        \PY{n}{user\PYZus{}ratings\PYZus{}matrix} \PY{o}{=} \PY{n}{user\PYZus{}rating\PYZus{}vector}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ratings\PYZus{}mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{isfinite}\PY{p}{(}\PY{n}{user\PYZus{}ratings\PYZus{}matrix}\PY{p}{)}
+        \PY{n}{user\PYZus{}ratings\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan\PYZus{}to\PYZus{}num}\PY{p}{(}\PY{n}{user\PYZus{}ratings\PYZus{}matrix}\PY{p}{)}
+
+        \PY{n}{theta} \PY{o}{=} \PY{n}{fit\PYZus{}users}\PY{p}{(}\PY{n}{user\PYZus{}ratings\PYZus{}matrix}\PY{p}{,} \PY{n}{ratings\PYZus{}mask}\PY{p}{,} \PY{n}{genome\PYZus{}matrix}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Optimization terminated successfully.
+         Current function value: 5.082708
+         Iterations: 96
+         Function evaluations: 210
+         Gradient evaluations: 210
+
+    \end{Verbatim}
+
+Ahora podemos tomar el $\theta$ que obtuvimos como las preferencias de nuestro usuario
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{preferences} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{genome\PYZus{}matrix}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+
+        \PY{n}{preferences}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} dark                  0.058778
+        masterpiece           0.057257
+        cult classic          0.056889
+        innocence lost        0.049008
+        oscar winner          0.048513
+        mentor                0.048007
+        mad scientist         0.043156
+        imagination           0.041792
+        imdb top 250          0.039944
+        love                  0.039931
+        dreams                0.039512
+        gunfight              0.039445
+        monster               0.038432
+        childhood             0.037762
+        prison                0.037117
+        social commentary     0.036180
+        weird                 0.035976
+        reflective            0.035807
+        great music           0.035077
+        alternate universe    0.034496
+        dtype: float64
+\end{Verbatim}
+
+Y podemos usar estas preferencias para darle recomendaciones
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{predictions} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{genome\PYZus{}matrix}\PY{o}{.}\PY{n}{values} \PY{o}{@} \PY{n}{theta}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{movies}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+
+        \PY{n}{predictions} \PY{o}{=} \PY{n}{predictions}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{n}{movies}\PY{o}{.}\PY{n}{title}\PY{p}{)}
+        \PY{n}{predictions}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{predictions}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{ratings\PYZus{}mask}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PYZbs{}
+            \PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}             rating                                              title
+        movie\_id
+        778       5.293866                               Trainspotting (1996)
+        5147      5.287688         Wild Strawberries (Smultronstället) (1957)
+        1237      5.286941    Seventh Seal, The (Sjunde inseglet, Det) (1957)
+        111       5.256287                                 Taxi Driver (1976)
+        1206      5.253421                         Clockwork Orange, A (1971)
+        1251      5.228539                                  8 1/2 (8½) (1963)
+        99764     5.175642                   It's Such a Beautiful Day (2012)
+        7361      5.158738       Eternal Sunshine of the Spotless Mind (2004)
+        7068      5.119508  Last Year at Marienbad (L'Année dernière à Mar{\ldots}
+        1228      5.119437                                 Raging Bull (1980)
+        1199      5.104201                                      Brazil (1985)
+        25793     5.091687                                      Vampyr (1932)
+        4878      5.089001                                Donnie Darko (2001)
+        6440      5.058139                                 Barton Fink (1991)
+        3476      5.040493                              Jacob's Ladder (1990)
+        61240     5.029298  Let the Right One In (Låt den rätte komma in) {\ldots}
+        4658      5.022652                                Santa Sangre (1989)
+        3676      5.021929                                  Eraserhead (1977)
+        1213      5.019151                                  Goodfellas (1990)
+        55444     5.012329                                     Control (2007)
+\end{Verbatim}
+
+\subsection{F.C. con vecinos mas cercanos para \emph{MovieLens}}
+\label{subsec:a3}
+
+A continuación se presenta la implementación del metodo de filtrado colaborativo para vecinos mas cercanos
+ para la base de datos de MovieLens. Primero cargamos los datos como lo hemos hecho antes:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+        \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}
+        \PY{n}{ratings\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}latest\PYZhy{}small/ratings.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{movies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}latest\PYZhy{}small/movies.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+
+        \PY{n}{ratings\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+        \PY{n}{user\PYZus{}ratings} \PY{o}{=} \PY{n}{ratings\PYZus{}df}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+Escogemos una columna al azar de la matriz, que representa las calificaciones del usuario correspondiente. Imprimimos sus peliculas mejor calificadas.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{user} \PY{o}{=} \PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{n}{movies}\PY{o}{.}\PY{n}{title}\PY{p}{[}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+         \PY{n}{user}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{user}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}           rating                                              title
+         movie\_id
+         1258         5.0                                Shining, The (1980)
+         1255         5.0                                   Bad Taste (1987)
+         1349         5.0  Vampire in Venice (Nosferatu a Venezia) (Nosfe{\ldots}
+         1348         5.0  Nosferatu (Nosferatu, eine Symphonie des Graue{\ldots}
+         1339         5.0             Dracula (Bram Stoker's Dracula) (1992)
+         1387         5.0                                        Jaws (1975)
+         247          5.0                          Heavenly Creatures (1994)
+         1333         4.0                                  Birds, The (1963)
+         1261         4.0                 Evil Dead II (Dead by Dawn) (1987)
+         1343         4.0                                   Cape Fear (1991)
+         1340         4.0  Bride of Frankenstein, The (Bride of Frankenst{\ldots}
+         188          4.0                               Prophecy, The (1995)
+         1321         4.0             American Werewolf in London, An (1981)
+         1            4.0                                   Toy Story (1995)
+         1219         4.0                                      Psycho (1960)
+         1215         4.0                            Army of Darkness (1993)
+         25           3.0                           Leaving Las Vegas (1995)
+         296          3.0                                Pulp Fiction (1994)
+         1341         3.0                             Burnt Offerings (1976)
+         593          3.0                   Silence of the Lambs, The (1991)
+\end{Verbatim}
+
+Ahora, inicializamos nuestro algoritmo de aprendizaje.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{NearestNeighbors}
+         \PY{n}{ratings\PYZus{}mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{isfinite}\PY{p}{(}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{user\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan\PYZus{}to\PYZus{}num}\PY{p}{(}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+
+         \PY{n}{nnbrs} \PY{o}{=} \PY{n}{NearestNeighbors}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{algorithm}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{brute}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cosine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{user\PYZus{}matrix}\PY{p}{)}
+\end{Verbatim}
+
+Obtenemos los vecinos de nuestro usuario y aproximamos sus calificaciones tomando en cuenta las calificaciones de sus vecinos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{distance}\PY{p}{,} \PY{n}{neighbors} \PY{o}{=} \PY{n}{nnbrs}\PY{o}{.}\PY{n}{kneighbors}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{nan\PYZus{}to\PYZus{}num}\PY{p}{(}\PY{n}{user}\PY{o}{.}\PY{n}{rating}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+
+         \PY{n}{similarity} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{distance}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+
+         \PY{n}{neighbor\PYZus{}mask} \PY{o}{=} \PY{n}{ratings\PYZus{}mask}\PY{p}{[}\PY{n}{neighbors}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{]}
+         \PY{n}{neighbors} \PY{o}{=} \PY{n}{user\PYZus{}matrix}\PY{p}{[}\PY{n}{neighbors}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{]}
+
+         \PY{n}{np}\PY{o}{.}\PY{n}{seterr}\PY{p}{(}\PY{n}{divide}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{invalid}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+         \PY{n}{pred} \PY{o}{=} \PY{n}{similarity} \PY{o}{@} \PY{n}{neighbors}
+         \PY{n}{pred} \PY{o}{=} \PY{n}{pred} \PY{o}{/} \PY{p}{(}\PY{n}{similarity} \PY{o}{*} \PY{n}{neighbor\PYZus{}mask}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+
+         \PY{n}{pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan\PYZus{}to\PYZus{}num}\PY{p}{(}\PY{n}{pred}\PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+Finalmente, para tener una idea de nuestros resultados, imprimimos las películas con mayor calificación predicha.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pred}
+         \PY{n}{user}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}           rating                                              title  predicted
+         movie\_id
+         2650         NaN                  Ghost of Frankenstein, The (1942)        5.0
+         2652         NaN                  Curse of Frankenstein, The (1957)        5.0
+         2634         NaN                                  Mummy, The (1959)        5.0
+         2644         NaN                                     Dracula (1931)        5.0
+         1721         NaN                                     Titanic (1997)        5.0
+         2647         NaN                       House of Frankenstein (1944)        5.0
+         2648         NaN                                Frankenstein (1931)        5.0
+         2649         NaN                         Son of Frankenstein (1939)        5.0
+         2636         NaN                          Mummy's Ghost, The (1944)        5.0
+         2651         NaN             Frankenstein Meets the Wolf Man (1943)        5.0
+         2635         NaN                          Mummy's Curse, The (1944)        5.0
+         2654         NaN                               Wolf Man, The (1941)        5.0
+         2664         NaN              Invasion of the Body Snatchers (1956)        5.0
+         2716         NaN         Ghostbusters (a.k.a. Ghost Busters) (1984)        5.0
+         3018         NaN                                 Re-Animator (1985)        5.0
+         1348         5.0  Nosferatu (Nosferatu, eine Symphonie des Graue{\ldots}        5.0
+         1354         NaN                          Breaking the Waves (1996)        5.0
+         1219         4.0                                      Psycho (1960)        5.0
+         326          NaN                            To Live (Huozhe) (1994)        5.0
+         534          NaN                                 Shadowlands (1993)        5.0
+\end{Verbatim}
+
+\subsection{Recomendaciones de MovieLens usando filtrado colaborativo con regresion}
+\label{subsec:a4}
+
+Comenzamos implementando el algoritmo de regresión para todos nuestro parametros.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{optimize} \PY{k}{import} \PY{n}{fmin\PYZus{}cg}
+
+
+        \PY{k}{def} \PY{n+nf}{simple\PYZus{}fit}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{,} \PY{n}{r\PYZus{}matrix}\PY{p}{,} \PY{n}{num\PYZus{}features}\PY{p}{,} \PY{n}{lam}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Ajusta el modelo de regresion dada una matriz de calificaciones y}
+        \PY{l+s+sd}{    una mascara de calificados}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{y} \PY{o}{=} \PY{n}{ui\PYZus{}matrix}
+            \PY{n}{r} \PY{o}{=} \PY{n}{r\PYZus{}matrix}
+            \PY{n}{num\PYZus{}items}\PY{p}{,} \PY{n}{num\PYZus{}users} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{shape}
+
+            \PY{n}{theta0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{num\PYZus{}users}\PY{p}{,} \PY{n}{num\PYZus{}features}\PY{p}{)}
+            \PY{n}{x0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{num\PYZus{}items}\PY{p}{,} \PY{n}{num\PYZus{}features}\PY{p}{)}
+
+            \PY{k}{def} \PY{n+nf}{fold\PYZus{}matrices}\PY{p}{(}\PY{n}{x\PYZus{}matrix}\PY{p}{,} \PY{n}{theta\PYZus{}matrix}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{x\PYZus{}matrix}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{theta\PYZus{}matrix}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+
+            \PY{k}{def} \PY{n+nf}{unfold\PYZus{}vector}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{n}{x0}\PY{o}{.}\PY{n}{size}\PY{p}{]}\PY{p}{,}
+                                      \PY{n}{x0}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                \PY{n}{theta\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{x0}\PY{o}{.}\PY{n}{size}\PY{p}{:}\PY{p}{]}\PY{p}{,}
+                                          \PY{n}{theta0}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                \PY{k}{return} \PY{n}{x\PYZus{}matrix}\PY{p}{,} \PY{n}{theta\PYZus{}matrix}
+
+            \PY{k}{def} \PY{n+nf}{unfold\PYZus{}parameter}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{:}
+                \PY{k}{def} \PY{n+nf}{wrapper}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{n}{f}\PY{p}{(}\PY{o}{*}\PY{n}{unfold\PYZus{}vector}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+
+                \PY{k}{return} \PY{n}{wrapper}
+
+            \PY{n+nd}{@unfold\PYZus{}parameter}
+            \PY{k}{def} \PY{n+nf}{optimization\PYZus{}target}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{:}
+                \PY{n}{differences} \PY{o}{=} \PY{n}{r} \PY{o}{*} \PY{p}{(}\PY{n}{x} \PY{o}{@} \PY{n}{theta}\PY{o}{.}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}
+                \PY{n}{square\PYZus{}error} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{differences}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                \PY{n}{regularization} \PY{o}{=} \PY{p}{(}\PY{n}{lam} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+
+                \PY{k}{return} \PY{n}{square\PYZus{}error} \PY{o}{+} \PY{n}{regularization}
+
+            \PY{n+nd}{@unfold\PYZus{}parameter}
+            \PY{k}{def} \PY{n+nf}{gradient}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{:}
+                \PY{n}{differences} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{r}\PY{p}{)}
+                \PY{n}{x\PYZus{}grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{differences}\PY{p}{,} \PY{n}{theta}\PY{p}{)} \PY{o}{+} \PY{n}{lam} \PY{o}{*} \PY{n}{x}
+                \PY{n}{theta\PYZus{}grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{differences}\PY{p}{)}\PY{o}{.}\PY{n}{T} \PY{o}{+} \PY{n}{lam} \PY{o}{*} \PY{n}{theta}
+
+                \PY{k}{return} \PY{n}{fold\PYZus{}matrices}\PY{p}{(}\PY{n}{x\PYZus{}grad}\PY{p}{,} \PY{n}{theta\PYZus{}grad}\PY{p}{)}
+
+            \PY{n}{init\PYZus{}fold} \PY{o}{=} \PY{n}{fold\PYZus{}matrices}\PY{p}{(}\PY{n}{x0}\PY{p}{,} \PY{n}{theta0}\PY{p}{)}
+            \PY{n}{result} \PY{o}{=} \PY{n}{fmin\PYZus{}cg}\PY{p}{(}\PY{n}{f}\PY{o}{=}\PY{n}{optimization\PYZus{}target}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{init\PYZus{}fold}\PY{p}{,} \PY{n}{fprime}\PY{o}{=}\PY{n}{gradient}\PY{p}{)}
+
+            \PY{n}{x}\PY{p}{,} \PY{n}{theta} \PY{o}{=} \PY{n}{unfold\PYZus{}vector}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+
+            \PY{k}{return} \PY{n}{x}\PY{p}{,} \PY{n}{theta}
+\end{Verbatim}
+
+
+Ahora, envolvemos el algoritmo en una funcion de normalización para obtener los resultados incluyendo normalización de medias.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{normalized\PYZus{}fit}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{o}{*}\PY{n}{args}\PY{p}{)}\PY{p}{:}
+            \PY{n}{means} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nanmean}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{means}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+
+            \PY{n}{r} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan\PYZus{}to\PYZus{}num}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+
+            \PY{n}{x}\PY{p}{,} \PY{n}{theta} \PY{o}{=} \PY{n}{simple\PYZus{}fit}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{r}\PY{p}{,} \PY{o}{*}\PY{n}{args}\PY{p}{)}
+
+            \PY{k}{return} \PY{n}{x}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{means}
+\end{Verbatim}
+
+
+Como de costumbre, cargamos el conjunto de datos de MovieLens
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{ratings\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}latest\PYZhy{}small/ratings.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{movies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}latest\PYZhy{}small/movies.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+
+        \PY{n}{ratings\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+        \PY{n}{user\PYZus{}ratings} \PY{o}{=} \PY{n}{ratings\PYZus{}df}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+Ajustamos el modelo de regresión para la matriz usando 200 caracteristicas y un valor de regularización de 0.2.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{x}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{means} \PY{o}{=} \PY{n}{normalized\PYZus{}fit}\PY{p}{(}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+
+        \PY{n}{feature\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning: Desired error not necessarily achieved due to precision loss.
+         Current function value: 915.220243
+         Iterations: 1381
+         Function evaluations: 2409
+         Gradient evaluations: 2397
+
+    \end{Verbatim}
+
+Seleccionamos un usuario al azar y vemos sus calificaciones mas altas.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{user} \PY{o}{=} \PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{user\PYZus{}id} \PY{o}{=} \PY{n}{user}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{user} \PY{o}{=} \PY{n}{user}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{n}{movies}\PY{o}{.}\PY{n}{title}\PY{p}{[}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+         \PY{n}{user}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{user}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:}           rating                                              title
+         movie\_id
+         47           5.0                        Seven (a.k.a. Se7en) (1995)
+         318          5.0                   Shawshank Redemption, The (1994)
+         1704         5.0                           Good Will Hunting (1997)
+         1196         5.0  Star Wars: Episode V - The Empire Strikes Back{\ldots}
+         1387         5.0                                        Jaws (1975)
+         1407         5.0                                      Scream (1996)
+         1625         5.0                                   Game, The (1997)
+         1617         5.0                           L.A. Confidential (1997)
+         1689         4.0                Man Who Knew Too Little, The (1997)
+         1672         4.0                              Rainmaker, The (1997)
+         1619         4.0                        Seven Years in Tibet (1997)
+         1597         4.0                           Conspiracy Theory (1997)
+         1584         4.0                                     Contact (1997)
+         1438         4.0                                Dante's Peak (1997)
+         953          4.0                       It's a Wonderful Life (1946)
+         1183         4.0                        English Patient, The (1996)
+         1198         4.0  Raiders of the Lost Ark (Indiana Jones and the{\ldots}
+         1488         3.0                            Devil's Own, The (1997)
+         1687         3.0                                 Jackal, The (1997)
+         1686         3.0                                  Red Corner (1997)
+\end{Verbatim}
+
+Calculamos las calificaciones aproximadas del usuario como $X^T\theta^{(j)} + \bar{X}$
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{theta\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{user\PYZus{}theta} \PY{o}{=} \PY{n}{theta\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{user\PYZus{}id}\PY{p}{]}
+
+         \PY{n}{pred} \PY{o}{=} \PY{p}{(}\PY{n}{user\PYZus{}theta}\PY{o}{.}\PY{n}{values} \PY{o}{@} \PY{n}{x}\PY{o}{.}\PY{n}{T}\PY{p}{)} \PY{o}{+} \PY{n}{means}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pred}
+         \PY{n}{user}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:}           rating                                              title  predicted
+         movie\_id
+         593          NaN                   Silence of the Lambs, The (1991)   5.344535
+         2571         NaN                                 Matrix, The (1999)   5.034324
+         4088         NaN                               Big Town, The (1987)   5.000031
+         92494        NaN                        Dylan Moran: Monster (2004)   5.000028
+         5960         NaN                               Bad Influence (1990)   5.000025
+         3216         NaN             Vampyros Lesbos (Vampiras, Las) (1971)   5.000024
+         4617         NaN                                 Let It Ride (1989)   5.000023
+         4522         NaN                                  Masquerade (1988)   5.000022
+         3038         NaN                        Face in the Crowd, A (1957)   5.000014
+         26151        NaN                         Au Hasard Balthazar (1966)   5.000005
+         107412       NaN  Kidnapping, Caucasian Style (Kavkazskaya plenn{\ldots}   5.000005
+         62115        NaN                                 Six Shooter (2004)   5.000004
+         118468       NaN                       Mei and the Kittenbus (2002)   5.000004
+         961          NaN                      Little Lord Fauntleroy (1936)   5.000004
+         1531         NaN                                Losing Chase (1996)   5.000003
+         50703        NaN                                 Secret, The (2006)   5.000003
+         3281         NaN                    Brandon Teena Story, The (1998)   5.000003
+         32460        NaN                   Knockin' on Heaven's Door (1997)   5.000003
+         107559       NaN  Am Ende eiens viel zu kurzen Tages (Death of a{\ldots}   5.000003
+         3612         NaN  The Slipper and the Rose: The Story of Cindere{\ldots}   5.000003
+\end{Verbatim}
+
+\subsection{Filtrado colaborativo con descomposicion SVD}
+\label{subsec:a5}
+Usemos SVD para acelerar nuestro filtrado colaborativo de películas. Cargamos los datos y preparamos nuestra matriz con normalización de medias.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+        \PY{n}{movies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}latest\PYZhy{}small/movies.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{ratings\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}latest\PYZhy{}small/ratings.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ratings\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+        \PY{n}{user\PYZus{}ratings} \PY{o}{=} \PY{n}{ratings\PYZus{}df}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                        \PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{ui\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+        \PY{n}{popularity} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{isfinite}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{means} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nanmean}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ui\PYZus{}matrix} \PY{o}{=} \PY{n}{ui\PYZus{}matrix} \PY{o}{\PYZhy{}} \PY{n}{means}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ui\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan\PYZus{}to\PYZus{}num}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{)}
+\end{Verbatim}
+
+
+Hacemos nuestra descomposición matricial especificando 500 caracteristicas.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{sparse}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k}{import} \PY{n}{svds}
+
+        \PY{n}{u}\PY{p}{,} \PY{n}{s}\PY{p}{,} \PY{n}{vt} \PY{o}{=} \PY{n}{svds}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{)}
+\end{Verbatim}
+
+Seleccionamos un usuario aleatorio.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{user} \PY{o}{=} \PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{user\PYZus{}id} \PY{o}{=} \PY{n}{user}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{user} \PY{o}{=} \PY{n}{user}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{n}{movies}\PY{o}{.}\PY{n}{title}\PY{p}{[}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+        \PY{n}{user}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{user}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}           rating                                              title
+        movie\_id
+        1            5.0                                   Toy Story (1995)
+        592          5.0                                      Batman (1989)
+        2858         5.0                             American Beauty (1999)
+        2797         5.0                                         Big (1988)
+        3114         5.0                                 Toy Story 2 (1999)
+        3176         5.0                    Talented Mr. Ripley, The (1999)
+        1639         5.0                                 Chasing Amy (1997)
+        3481         5.0                               High Fidelity (2000)
+        3578         5.0                                   Gladiator (2000)
+        1356         5.0                    Star Trek: First Contact (1996)
+        1259         5.0                                 Stand by Me (1986)
+        1221         5.0                     Godfather: Part II, The (1974)
+        1214         5.0                                       Alien (1979)
+        1198         5.0  Raiders of the Lost Ark (Indiana Jones and the{\ldots}
+        1193         5.0             One Flew Over the Cuckoo's Nest (1975)
+        4306         5.0                                       Shrek (2001)
+        2918         5.0                    Ferris Bueller's Day Off (1986)
+        5952         5.0      Lord of the Rings: The Two Towers, The (2002)
+        4846         5.0  Iron Monkey (Siu nin Wong Fei-hung ji: Tit Ma {\ldots}
+        260          5.0          Star Wars: Episode IV - A New Hope (1977)
+\end{Verbatim}
+
+Calculamos nuestras calificaciones aproximadas.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{theta\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{vt}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+
+        \PY{n}{user\PYZus{}theta} \PY{o}{=} \PY{n}{theta\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{user\PYZus{}id}\PY{p}{]}
+
+        \PY{n}{pred} \PY{o}{=} \PY{p}{(}\PY{n}{user\PYZus{}theta}\PY{o}{.}\PY{n}{values} \PY{o}{@} \PY{p}{(}\PY{n}{s} \PY{o}{*} \PY{n}{u}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)} \PY{o}{+} \PY{n}{means}
+\end{Verbatim}
+
+Imprimimos los resultados.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pred}
+        \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relevance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{popularity}
+        \PY{n}{user}\PY{p}{[}\PY{n}{user}\PY{o}{.}\PY{n}{rating}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relevance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}           rating                                              title  \textbackslash{}
+        movie\_id
+        296          NaN                                Pulp Fiction (1994)
+        356          NaN                                Forrest Gump (1994)
+        527          NaN                            Schindler's List (1993)
+        1196         NaN  Star Wars: Episode V - The Empire Strikes Back{\ldots}
+        608          NaN                                       Fargo (1996)
+        589          NaN                  Terminator 2: Judgment Day (1991)
+        1270         NaN                          Back to the Future (1985)
+        110          NaN                                  Braveheart (1995)
+        858          NaN                              Godfather, The (1972)
+        1210         NaN  Star Wars: Episode VI - Return of the Jedi (1983)
+        50           NaN                         Usual Suspects, The (1995)
+        47           NaN                        Seven (a.k.a. Se7en) (1995)
+        588          NaN                                     Aladdin (1992)
+        32           NaN          Twelve Monkeys (a.k.a. 12 Monkeys) (1995)
+        780          NaN               Independence Day (a.k.a. ID4) (1996)
+        364          NaN                              Lion King, The (1994)
+        2028         NaN                         Saving Private Ryan (1998)
+        590          NaN                          Dances with Wolves (1990)
+        1580         NaN                   Men in Black (a.k.a. MIB) (1997)
+        1197         NaN                         Princess Bride, The (1987)
+
+                  predicted    relevance
+        movie\_id
+        296        4.248962  1376.663713
+        356        4.032926  1375.227797
+        527        4.304056  1050.189678
+        1196       4.237824   991.650929
+        608        4.257189   953.610249
+        589        4.005997   949.421358
+        1270       4.014198   907.208763
+        110        3.937018   897.640189
+        858        4.465236   893.047173
+        1210       4.057057   880.381442
+        50         4.344517   873.247952
+        47         4.026175   809.261176
+        588        3.662208   787.374662
+        32         3.928926   770.069566
+        780        3.487695   760.317444
+        364        3.794904   758.980718
+        2028       3.934426   751.475424
+        590        3.707650   748.945372
+        1580       3.671700   697.622927
+        1197       4.206574   685.671613
+\end{Verbatim}
+
+\subsection{Recomendaciones iniciales con clustering en MovieLens}
+\label{subsec:a6}
+
+Se presenta una implementacion del algoritmo de recomendaciones iniciales
+usando clustering descrito en la seccion \ref{clustering} para una matriz de
+contenido obtenida por factorización SVD usando la base de datos de \emph{MovieLens}.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+    \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+    \PY{n}{movies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}latest\PYZhy{}small/movies.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+    \PY{n}{ratings\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/ml\PYZhy{}latest\PYZhy{}small/ratings.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+    \PY{n}{ratings\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+    \PY{n}{user\PYZus{}ratings} \PY{o}{=} \PY{n}{ratings\PYZus{}df}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{ui\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+    \PY{n}{popularity} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{isfinite}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+    \PY{n}{means} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nanmean}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+    \PY{n}{ui\PYZus{}matrix} \PY{o}{=} \PY{n}{ui\PYZus{}matrix} \PY{o}{\PYZhy{}} \PY{n}{means}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+    \PY{n}{ui\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan\PYZus{}to\PYZus{}num}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{sparse}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k}{import} \PY{n}{svds}
+
+    \PY{n}{u}\PY{p}{,} \PY{n}{s}\PY{p}{,} \PY{n}{vt} \PY{o}{=} \PY{n}{svds}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{)}
+\end{Verbatim}
+
+Ahora realizamos clustering K medias para encontrar clusters de películas
+similares. El numero de clusters es una situación delicada. Necesitamos un
+numero de clusters que divida los artículos representativamente, pero tampoco
+puede ser muy bajo, ya que la idea es tener al usuario calificar un articulo de
+cada cluster.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+
+    \PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{10}
+    \PY{n}{kmeans} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{)}
+    \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{o}{.}\PY{n}{fit\PYZus{}predict}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+
+    \PY{n}{cluster\PYZus{}mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{p}{[}\PY{n}{clusters} \PY{o}{==} \PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+
+    \PY{n}{ratings\PYZus{}mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{isfinite}\PY{p}{(}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+\end{Verbatim}
+
+
+Lo siguiente es obtener el articulo mas relevante de cada cluster. Para hacer
+esto, primero necesitamos una métrica de relevancia para nuestros articulos.
+Inspirandonos en el TFIDF, definimos la relevancia de un articulo $i$ en funcion
+sus calificaciones existentes $R_i$ como
+
+$$t_i = \sum\limits_{j\in U}R_{i, j}log\big(1 + \frac{N}{n_i}\big)$$
+
+Usando esta métrica, calculamos la relevancia de todos los artículos y ordenamos los objetos de nuestros clusters usándola.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{ratings\PYZus{}mask}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{size}
+    \PY{n}{relevance} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{ui\PYZus{}matrix}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/} \PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*}
+                 \PY{p}{(}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{ratings\PYZus{}mask}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+
+    \PY{n}{relevance\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{relevance}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{user\PYZus{}ratings}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+    \PY{n}{relevance\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{movies}\PY{o}{.}\PY{n}{title}\PY{p}{[}\PY{n+nb}{id}\PY{p}{]} \PY{k}{for} \PY{n+nb}{id} \PY{o+ow}{in} \PY{n}{relevance\PYZus{}df}\PY{o}{.}\PY{n}{index}\PY{p}{]}
+    \PY{n}{relevance\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relevance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+    \PY{n}{relevance\PYZus{}df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relevance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+
+
+    \PY{n}{masked\PYZus{}array} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{tile}\PY{p}{(}\PY{n}{relevance}\PY{p}{,} \PY{p}{(}\PY{n}{cluster\PYZus{}mask}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+    \PY{n}{masked\PYZus{}array}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{cluster\PYZus{}mask}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{inf}
+    \PY{n}{sorted\PYZus{}array} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{masked\PYZus{}array}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+
+    \PY{n}{relevance\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{sorted\PYZus{}array}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+Obtenemos los articulos mas relevantes de cada cluster. Estas seran las que
+recomendaremos al usuario.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}              relevance                                              title
+    movie\_id
+    1304      5.920166e-15          Butch Cassidy and the Sundance Kid (1969)
+    4447     -2.042610e-15                              Legally Blonde (2001)
+    3354      8.000224e-16                             Mission to Mars (2000)
+    344      -4.114401e-16                  Ace Ventura: Pet Detective (1994)
+    778      -5.806614e-15                               Trainspotting (1996)
+    3730      5.739291e-15                           Conversation, The (1974)
+    780      -5.504741e-16               Independence Day (a.k.a. ID4) (1996)
+    25       -2.613935e-15                           Leaving Las Vegas (1995)
+    7153     -1.159123e-15  Lord of the Rings: The Return of the King, The{\ldots}
+    1196     -8.205358e-16  Star Wars: Episode V - The Empire Strikes Back{\ldots}
+\end{Verbatim}
+
+\end{document}
